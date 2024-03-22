@@ -1,6 +1,6 @@
 //TODO: Add Stage Reverser
 //TODO: Add Spike Creator
-//TODO: Add Distance Between Two Points
+//TODO: Add Middle Between Two Points
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,7 +23,7 @@ public class Main {
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                distanceBetweenTwoPoints();
+                middleOfTwoPoints();
             }
         });
         frame.add(button1);
@@ -42,9 +42,27 @@ public class Main {
         frame.setVisible(true);
     }
 
-    public static void distanceBetweenTwoPoints() {
-        System.out.println("Button 1 clicked!");
+    public static void middleOfTwoPoints() {
 
+        //takes the x and z of the two stage pieces you want to find the middle of a
+
+        String num1xStr = JOptionPane.showInputDialog("Enter x coordinate of first point:");
+        String num1zStr = JOptionPane.showInputDialog("Enter z coordinate of first point:");
+        String num2xStr = JOptionPane.showInputDialog("Enter x coordinate of second point:");
+        String num2zStr = JOptionPane.showInputDialog("Enter z coordinate of second point:");
+
+
+        double num1x = Double.parseDouble(num1xStr);
+        double num1z = Double.parseDouble(num1zStr);
+        double num2x = Double.parseDouble(num2xStr);
+        double num2z = Double.parseDouble(num2zStr);
+
+
+        double middleX = (num1x + num2x) / 2;
+        double middleY = (num1z + num2z) / 2;
+
+
+        JOptionPane.showMessageDialog(null, "Middle point coordinates: (" + middleX + ", " + middleY + ")");
     }
 
     public static void stageReverser() {
