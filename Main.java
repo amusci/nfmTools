@@ -38,6 +38,16 @@ public class Main {
         });
         frame.add(button2);
 
+        //initalize button 2 (this will be the stage reverser)
+        JButton button3 = new JButton("Press 3");
+        button3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                spikeSetter();
+            }
+        });
+        frame.add(button3);
+
         frame.setSize(300, 300);
         frame.setVisible(true);
     }
@@ -75,6 +85,12 @@ public class Main {
 
     public static void stageReverser() {
         System.out.println("Button 2 clicked!");
+
+    }
+
+    public static void spikeSetter() {
+        //TODO: take coords of one spike and how many you want, and then sets multiple for you
+        System.out.println("Spike Setter Button Clicked");
 
     }
 }
