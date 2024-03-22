@@ -44,7 +44,7 @@ public class Main {
 
     public static void middleOfTwoPoints() {
 
-        //takes the x and z of the two stage pieces you want to find the middle of a
+        //copy and pasteable answer for the middle of two stage pieces
 
         String num1xStr = JOptionPane.showInputDialog("Enter x coordinate of first point:");
         String num1zStr = JOptionPane.showInputDialog("Enter z coordinate of first point:");
@@ -62,7 +62,15 @@ public class Main {
         double middleY = (num1z + num2z) / 2;
 
 
-        JOptionPane.showMessageDialog(null, "Middle point coordinates: (" + middleX + ", " + middleY + ")");
+        JTextArea textArea = new JTextArea(1, 20);
+        textArea.setText("Middle point coordinates: (" + middleX + ", " + middleY + ")");
+        textArea.setEditable(false);
+
+
+        JScrollPane scrollPane = new JScrollPane(textArea);
+
+
+        JOptionPane.showMessageDialog(null, scrollPane);
     }
 
     public static void stageReverser() {
