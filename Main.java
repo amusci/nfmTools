@@ -89,8 +89,49 @@ public class Main {
     }
 
     public static void spikeSetter() {
-        //TODO: take coords of one spike and how many you want, and then sets multiple for you
-        System.out.println("Spike Setter Button Clicked");
+        int SET_DISANCE = 1100;
+        String originalSpike = JOptionPane.showInputDialog("Enter the code of the first spike:");
+        String strAmountOfSpikes = JOptionPane.showInputDialog("Enter how many spikes you would like to set:");
+        int intAmountOfSpikes = Integer.parseInt(strAmountOfSpikes);
+
+        //This will handle whether if the X or the Z value will be changed
+        String[] XZ = {"X", "Z"};
+        int xOrZOption = JOptionPane.showOptionDialog(null,
+                "Would you like to expand in the x or z direction?",
+                "Direction Selection",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                XZ,
+                XZ[0]);
+
+        if (xOrZOption == 0) {
+            System.out.println("X");
+        } else if (xOrZOption == 1) {
+            System.out.println("Z");
+        }
+
+        //This will handle if it's going in a positive or negative direction on the specified plane
+        String[] PlusMinus = {"+", "-"};
+        int plusOrMinusOption = JOptionPane.showOptionDialog(null,
+                "Are we going in a positive or negative direction?",
+                "Direction Selection",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                PlusMinus,
+                PlusMinus[0]);
+
+
+        if (xOrZOption == 0) {
+            System.out.println("+");
+        } else if (xOrZOption == 1) {
+            System.out.println("-");
+        }
 
     }
+
+
+
+
 }
