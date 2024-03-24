@@ -10,10 +10,8 @@ import java.awt.event.ActionEvent;
 
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Main {
-    private static final int SET_DISTANCE = 1100;
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("NFMTools");
@@ -22,8 +20,7 @@ public class Main {
 
         frame.setLayout(new FlowLayout(FlowLayout.CENTER));
 
-        //initalize button 1 (this will be distance between two points)
-        JButton button1 = new JButton("Press 1");
+        JButton button1 = new JButton("middle of two points");
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -32,8 +29,7 @@ public class Main {
         });
         frame.add(button1);
 
-        //initalize button 2 (this will be the stage reverser)
-        JButton button2 = new JButton("Press 2");
+        JButton button2 = new JButton("stage reverser");
         button2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -42,8 +38,7 @@ public class Main {
         });
         frame.add(button2);
 
-        //initalize button 2 (this will be the stage reverser)
-        JButton button3 = new JButton("Press 3");
+        JButton button3 = new JButton("spike setter");
         button3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -95,13 +90,9 @@ public class Main {
     public static void spikeSetter() {
         String originalSpike = JOptionPane.showInputDialog("Enter the code of the first spike:");
         String[] splitSpike = originalSpike.split(",");
-        System.out.println(Arrays.toString(splitSpike));
         String strAmountOfSpikes = JOptionPane.showInputDialog("Enter how many spikes you would like to set:");
         int intAmountOfSpikes = Integer.parseInt(strAmountOfSpikes);
-        int newValue;
-        String valueToChange = null;
-
-        // This will handle whether if the X or the Z value will be changed
+        String valueToChange;
         String[] XZ = {"X", "Z"};
         int xOrZOption = JOptionPane.showOptionDialog(null,
                 "Would you like to expand in the x or z direction?",
@@ -112,26 +103,36 @@ public class Main {
                 XZ,
                 XZ[0]);
 
+        JTextArea updatedSpikeArea = new JTextArea();
+        updatedSpikeArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(updatedSpikeArea);
+
         if (xOrZOption == 0) {
-            valueToChange = splitSpike[1];
-            System.out.println(valueToChange);
-            ArrayList<Integer> ans = handleDirection(splitSpike,valueToChange,intAmountOfSpikes);
-            System.out.println(ans);
-
+            valueToChange = splitSpike[1]; // take the x value
+            ArrayList<Integer> ans = getValuesOfSpikes(valueToChange, intAmountOfSpikes);
+            for (int i = 0; i < intAmountOfSpikes; i++) {
+                splitSpike[1] = String.valueOf(ans.get(i));
+                String updatedSpike = String.join(",", splitSpike);
+                updatedSpikeArea.append(updatedSpike + "\n");
+            }
         } else if (xOrZOption == 1) {
-            valueToChange = splitSpike[2];
-            ArrayList<Integer> ans = handleDirection(splitSpike,valueToChange,intAmountOfSpikes);
-            System.out.println(ans);
-
+            valueToChange = splitSpike[2]; // take the z value
+            ArrayList<Integer> ans = getValuesOfSpikes(valueToChange, intAmountOfSpikes);
+            for (int i = 0; i < intAmountOfSpikes; i++) {
+                splitSpike[2] = String.valueOf(ans.get(i));
+                String updatedSpike = String.join(",", splitSpike);
+                updatedSpikeArea.append(updatedSpike + "\n");
+            }
         }
 
+        JOptionPane.showMessageDialog(null, scrollPane);
 
     }
-
-    public static ArrayList<Integer> handleDirection(String[] splittedCode, String value, int numberOfSpikes) {
+    public static ArrayList<Integer> getValuesOfSpikes(String value, int numberOfSpikes) {
+        //returns the values of all the spikes being created
         ArrayList<Integer> values = new ArrayList<>();
         int newValue = Integer.parseInt(value);
-        int SET_DISTANCE = 1100; // Assuming SET_DISTANCE is defined somewhere
+        int SET_DISTANCE = 1100; // i believe this is spike distance idk
 
         String[] PlusMinus = {"+", "-"};
         int plusOrMinusOption = JOptionPane.showOptionDialog(null,
@@ -144,15 +145,11 @@ public class Main {
                 PlusMinus[0]);
 
         if (plusOrMinusOption == 0) {
-            // Perform the action for positive direction
-            System.out.println("Positive direction:");
             for (int i = 0; i <= numberOfSpikes; i++) {
                 newValue += SET_DISTANCE;
                 values.add(newValue);
             }
         } else if (plusOrMinusOption == 1) {
-            // Perform the action for negative direction
-            System.out.println("Negative direction:");
             for (int i = 0; i <= numberOfSpikes; i++) {
                 newValue -= SET_DISTANCE;
                 values.add(newValue);
