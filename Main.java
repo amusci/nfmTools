@@ -88,6 +88,7 @@ public class Main {
     }
 
     public static void spikeSetter() {
+        int distanceBetweenSpikes = 1100;
         String originalSpike = JOptionPane.showInputDialog("Enter the code of the first spike:");
         String[] splitSpike = originalSpike.split(",");
         String strAmountOfSpikes = JOptionPane.showInputDialog("Enter how many spikes you would like to set:");
@@ -109,7 +110,7 @@ public class Main {
 
         if (xOrZOption == 0) {
             valueToChange = splitSpike[1]; // take the x value
-            ArrayList<Integer> ans = getValuesOfSpikes(valueToChange, intAmountOfSpikes);
+            ArrayList<Integer> ans = getValuesOfStagePiece(valueToChange, intAmountOfSpikes, distanceBetweenSpikes);
             for (int i = 0; i < intAmountOfSpikes; i++) {
                 splitSpike[1] = String.valueOf(ans.get(i));
                 String updatedSpike = String.join(",", splitSpike);
@@ -117,7 +118,7 @@ public class Main {
             }
         } else if (xOrZOption == 1) {
             valueToChange = splitSpike[2]; // take the z value
-            ArrayList<Integer> ans = getValuesOfSpikes(valueToChange, intAmountOfSpikes);
+            ArrayList<Integer> ans = getValuesOfStagePiece(valueToChange, intAmountOfSpikes, distanceBetweenSpikes);
             for (int i = 0; i < intAmountOfSpikes; i++) {
                 splitSpike[2] = String.valueOf(ans.get(i));
                 String updatedSpike = String.join(",", splitSpike);
@@ -128,11 +129,11 @@ public class Main {
         JOptionPane.showMessageDialog(null, scrollPane);
 
     }
-    public static ArrayList<Integer> getValuesOfSpikes(String value, int numberOfSpikes) {
+    public static ArrayList<Integer> getValuesOfStagePiece(String value, int numberOfStagePieces, int distanceBetweenPieces) {
         //returns the values of all the spikes being created
         ArrayList<Integer> values = new ArrayList<>();
         int newValue = Integer.parseInt(value);
-        int SET_DISTANCE = 1100; // i believe this is spike distance idk
+        int spikeDistance = 1100; // i believe this is spike distance idk IDK SHUT UP
 
         String[] PlusMinus = {"+", "-"};
         int plusOrMinusOption = JOptionPane.showOptionDialog(null,
@@ -145,13 +146,13 @@ public class Main {
                 PlusMinus[0]);
 
         if (plusOrMinusOption == 0) {
-            for (int i = 0; i <= numberOfSpikes; i++) {
-                newValue += SET_DISTANCE;
+            for (int i = 0; i <= numberOfStagePieces; i++) {
+                newValue += distanceBetweenPieces;
                 values.add(newValue);
             }
         } else if (plusOrMinusOption == 1) {
-            for (int i = 0; i <= numberOfSpikes; i++) {
-                newValue -= SET_DISTANCE;
+            for (int i = 0; i <= numberOfStagePieces; i++) {
+                newValue -= distanceBetweenPieces;
                 values.add(newValue);
             }
         }
