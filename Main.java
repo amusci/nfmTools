@@ -91,6 +91,7 @@ public class Main {
     public static void spikeSetter() {
         int SET_DISANCE = 1100;
         String originalSpike = JOptionPane.showInputDialog("Enter the code of the first spike:");
+        String[] splitSpike = originalSpike.replaceAll("[^0-9,-]", "").split(",");
         String strAmountOfSpikes = JOptionPane.showInputDialog("Enter how many spikes you would like to set:");
         int intAmountOfSpikes = Integer.parseInt(strAmountOfSpikes);
 
@@ -106,9 +107,11 @@ public class Main {
                 XZ[0]);
 
         if (xOrZOption == 0) {
-            System.out.println("X");
+            String valueToChange = splitSpike[1];
+            System.out.println(valueToChange);
         } else if (xOrZOption == 1) {
-            System.out.println("Z");
+            String valueToChange = splitSpike[2];
+            System.out.println(valueToChange);
         }
 
         //This will handle if it's going in a positive or negative direction on the specified plane
@@ -123,9 +126,9 @@ public class Main {
                 PlusMinus[0]);
 
 
-        if (xOrZOption == 0) {
+        if (plusOrMinusOption == 0) {
             System.out.println("+");
-        } else if (xOrZOption == 1) {
+        } else if (plusOrMinusOption == 1) {
             System.out.println("-");
         }
 
