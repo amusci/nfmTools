@@ -9,8 +9,12 @@ import java.awt.event.ActionEvent;
 
 
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Main {
+    private static final int SET_DISTANCE = 1100;
+
     public static void main(String[] args) {
         JFrame frame = new JFrame("NFMTools");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -89,13 +93,15 @@ public class Main {
     }
 
     public static void spikeSetter() {
-        int SET_DISANCE = 1100;
         String originalSpike = JOptionPane.showInputDialog("Enter the code of the first spike:");
-        String[] splitSpike = originalSpike.replaceAll("[^0-9,-]", "").split(",");
+        String[] splitSpike = originalSpike.split(",");
+        System.out.println(Arrays.toString(splitSpike));
         String strAmountOfSpikes = JOptionPane.showInputDialog("Enter how many spikes you would like to set:");
         int intAmountOfSpikes = Integer.parseInt(strAmountOfSpikes);
+        int newValue;
+        String valueToChange = null;
 
-        //This will handle whether if the X or the Z value will be changed
+        // This will handle whether if the X or the Z value will be changed
         String[] XZ = {"X", "Z"};
         int xOrZOption = JOptionPane.showOptionDialog(null,
                 "Would you like to expand in the x or z direction?",
@@ -107,14 +113,26 @@ public class Main {
                 XZ[0]);
 
         if (xOrZOption == 0) {
-            String valueToChange = splitSpike[1];
+            valueToChange = splitSpike[1];
             System.out.println(valueToChange);
+            ArrayList<Integer> ans = handleDirection(splitSpike,valueToChange,intAmountOfSpikes);
+            System.out.println(ans);
+
         } else if (xOrZOption == 1) {
-            String valueToChange = splitSpike[2];
-            System.out.println(valueToChange);
+            valueToChange = splitSpike[2];
+            ArrayList<Integer> ans = handleDirection(splitSpike,valueToChange,intAmountOfSpikes);
+            System.out.println(ans);
+
         }
 
-        //This will handle if it's going in a positive or negative direction on the specified plane
+
+    }
+
+    public static ArrayList<Integer> handleDirection(String[] splittedCode, String value, int numberOfSpikes) {
+        ArrayList<Integer> values = new ArrayList<>();
+        int newValue = Integer.parseInt(value);
+        int SET_DISTANCE = 1100; // Assuming SET_DISTANCE is defined somewhere
+
         String[] PlusMinus = {"+", "-"};
         int plusOrMinusOption = JOptionPane.showOptionDialog(null,
                 "Are we going in a positive or negative direction?",
@@ -125,16 +143,21 @@ public class Main {
                 PlusMinus,
                 PlusMinus[0]);
 
-
         if (plusOrMinusOption == 0) {
-            System.out.println("+");
+            // Perform the action for positive direction
+            System.out.println("Positive direction:");
+            for (int i = 0; i <= numberOfSpikes; i++) {
+                newValue += SET_DISTANCE;
+                values.add(newValue);
+            }
         } else if (plusOrMinusOption == 1) {
-            System.out.println("-");
+            // Perform the action for negative direction
+            System.out.println("Negative direction:");
+            for (int i = 0; i <= numberOfSpikes; i++) {
+                newValue -= SET_DISTANCE;
+                values.add(newValue);
+            }
         }
-
+        return values;
     }
-
-
-
-
 }
