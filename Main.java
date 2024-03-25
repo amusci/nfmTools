@@ -17,6 +17,9 @@ public class Main {
         JFrame frame = new JFrame("NFMTools");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        Color darkBackground = new Color(36, 37, 42); // You can adjust the RGB values as needed
+        frame.getContentPane().setBackground(darkBackground);
+
 
         frame.setLayout(new FlowLayout(FlowLayout.CENTER));
 
@@ -69,25 +72,18 @@ public class Main {
         String num2xStr = JOptionPane.showInputDialog("Enter x coordinate of second point:");
         String num2zStr = JOptionPane.showInputDialog("Enter z coordinate of second point:");
 
-
         double num1x = Double.parseDouble(num1xStr);
         double num1z = Double.parseDouble(num1zStr);
         double num2x = Double.parseDouble(num2xStr);
         double num2z = Double.parseDouble(num2zStr);
 
-
         double middleX = (num1x + num2x) / 2;
         double middleY = (num1z + num2z) / 2;
-
 
         JTextArea textArea = new JTextArea(1, 20);
         textArea.setText("Middle point coordinates: (" + middleX + ", " + middleY + ")");
         textArea.setEditable(false);
-
-
         JScrollPane scrollPane = new JScrollPane(textArea);
-
-
         JOptionPane.showMessageDialog(null, scrollPane);
     }
 
@@ -185,8 +181,6 @@ public class Main {
         //returns the values of all the spikes being created
         ArrayList<Integer> values = new ArrayList<>();
         int newValue = Integer.parseInt(value);
-        int spikeDistance = 1100; // i believe this is spike distance idk IDK SHUT UP
-
         String[] PlusMinus = {"+", "-"};
         int plusOrMinusOption = JOptionPane.showOptionDialog(null,
                 "Are we going in a positive or negative direction?",
