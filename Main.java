@@ -47,6 +47,15 @@ public class Main {
         });
         frame.add(button3);
 
+        JButton button4 = new JButton("railing setter");
+        button4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                railingSetter();
+            }
+        });
+        frame.add(button4);
+
         frame.setSize(300, 300);
         frame.setVisible(true);
     }
@@ -122,6 +131,49 @@ public class Main {
             for (int i = 0; i < intAmountOfSpikes; i++) {
                 splitSpike[2] = String.valueOf(ans.get(i));
                 String updatedSpike = String.join(",", splitSpike);
+                updatedSpikeArea.append(updatedSpike + "\n");
+            }
+        }
+
+        JOptionPane.showMessageDialog(null, scrollPane);
+
+    }
+
+    public static void railingSetter() {
+        int distanceBetweenRailings = 2000;
+        String originalRail = JOptionPane.showInputDialog("Enter the code of the first railing:");
+        String[] splitRail = originalRail.split(",");
+        String strAmountOfRail = JOptionPane.showInputDialog("Enter how many railings you would like to set:");
+        int intAmountOfRail = Integer.parseInt(strAmountOfRail);
+        String valueToChange;
+        String[] XZ = {"X", "Z"};
+        int xOrZOption = JOptionPane.showOptionDialog(null,
+                "Would you like to expand in the x or z direction?",
+                "Direction Selection",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                XZ,
+                XZ[0]);
+
+        JTextArea updatedSpikeArea = new JTextArea();
+        updatedSpikeArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(updatedSpikeArea);
+
+        if (xOrZOption == 0) {
+            valueToChange = splitRail[1]; // take the x value
+            ArrayList<Integer> ans = getValuesOfStagePiece(valueToChange, intAmountOfRail, distanceBetweenRailings);
+            for (int i = 0; i < intAmountOfRail; i++) {
+                splitRail[1] = String.valueOf(ans.get(i));
+                String updatedSpike = String.join(",", splitRail);
+                updatedSpikeArea.append(updatedSpike + "\n");
+            }
+        } else if (xOrZOption == 1) {
+            valueToChange = splitRail[2]; // take the z value
+            ArrayList<Integer> ans = getValuesOfStagePiece(valueToChange, intAmountOfRail, distanceBetweenRailings);
+            for (int i = 0; i < intAmountOfRail; i++) {
+                splitRail[2] = String.valueOf(ans.get(i));
+                String updatedSpike = String.join(",", splitRail);
                 updatedSpikeArea.append(updatedSpike + "\n");
             }
         }
